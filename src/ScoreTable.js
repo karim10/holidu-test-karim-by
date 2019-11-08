@@ -1,65 +1,177 @@
 /* eslint-disable no-script-url */
 
-import React from 'react';
-import Link from '@material-ui/core/Link';
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Title from './Title';
-
-// Generate Score Data
-function createData(id, firstName, lastName, email, gender, city, country, score, createdAt) {
-  return { id, firstName, lastName, email, gender, city, country, score, createdAt };
-}
-
-const rows = [
-  createData("a67e6828-99d9-4d8d-9cd7-8aff12e95973", "Murdock", "Ledstone", "mledstone0@mayoclinic.com", "Male", "Olofström", "SE", null, "2017-04-05T02:28:37Z"),
-  createData("0d9d17cd-c3f4-476b-a089-ae0d973f5cd3", "Jaclin", "Casbourne", "jcasbourne1@nifty.com", "Female", "Kunvald", "CZ", 53, "2017-01-03T23:13:01Z"),
-  createData("8a9f557a-9a87-4555-a70e-c20a07eb9488", "Sunshine", "Mattusevich", "smattusevich2@scribd.com", "Female", "Meiyao", "CN", 69, "2018-07-26T23:34:07Z"),
-  createData("c87a857e-9b34-48f5-a182-4beffaa592ec", "Hadria", "Dunsmuir", "hdunsmuir3@typepad.com", null, null, "ID", null, "2017-01-13T04:17:49Z"),
-  createData("ef71bf15-3191-405f-b855-3f0072582568", "Rainer", "Burrows", "rburrows4@i2i.jp", "Male", "Faratsiho", "MG", 69, "2019-06-05T16:09:27Z"),
-];
+import React from "react";
+import Link from "@material-ui/core/Link";
+import { makeStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import TableSortLabel from "@material-ui/core/TableSortLabel";
+import Title from "./Title";
 
 const useStyles = makeStyles(theme => ({
   seeMore: {
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing(3)
   },
+  tableColumn: {
+    width: "18%"
+  }
 }));
 
-export default function ScoreTable() {
+const columnsDetails = [
+  {
+    label: "Last Name",
+    attribute: "last_name",
+    attributeType: "string"
+  },
+  {
+    label: "First Name",
+    attribute: "first_name",
+    attributeType: "string"
+  },
+  {
+    label: "Gender",
+    attribute: "gender",
+    attributeType: "string"
+  },
+  {
+    label: "City",
+    attribute: "city",
+    attributeType: "string"
+  },
+  {
+    label: "Country",
+    attribute: "country",
+    attributeType: "string"
+  },
+  {
+    label: "Score",
+    attribute: "score",
+    attributeType: "number"
+  }
+];
+
+function compareStrings(item1, item2, order, orderBy) {
+  if (item1[orderBy] === item2[orderBy]) {
+    return 0;
+  } else if (item1[orderBy] === null) {
+    return 1;
+  } else if (item2[orderBy] === null) {
+    return -1;
+  } else if (order === "asc") {
+    return item1[orderBy].toLowerCase() < item2[orderBy].toLowerCase() ? -1 : 1;
+  } else {
+    return item1[orderBy].toLowerCase() < item2[orderBy].toLowerCase() ? 1 : -1;
+  }
+}
+
+function compareNumericals(item1, item2, orderBy) {
+  return item1[orderBy] - item2[orderBy];
+}
+
+function getSortedTable(peopleData, order, orderBy, attributeType) {
+  return peopleData.sort((item1, item2) => {
+    if (attributeType === "number") {
+      return order === "asc"
+        ? compareNumericals(item1, item2, orderBy)
+        : -compareNumericals(item1, item2, orderBy);
+    } else {
+      return compareStrings(item1, item2, order, orderBy);
+    }
+  });
+}
+
+function EnhancedHeaderTable(props) {
   const classes = useStyles();
+  const { columnsDetails, handleSorting, order, orderBy } = props;
+  return (
+    <TableHead>
+      <TableRow>
+        {columnsDetails.map((columnDetails, i) => {
+          const alignment = i === columnsDetails.length - 1 ? "right" : "left";
+          return (
+            <TableCell
+              className={classes.tableColumn}
+              align={alignment}
+              key={columnDetails.attribute}
+            >
+              <TableSortLabel
+                active={orderBy === columnDetails.attribute}
+                direction={order}
+                onClick={() =>
+                  handleSorting(
+                    columnDetails.attribute,
+                    columnDetails.attributeType
+                  )
+                }
+              >
+                {columnDetails.label}
+              </TableSortLabel>
+            </TableCell>
+          );
+        })}
+      </TableRow>
+    </TableHead>
+  );
+}
+
+export default function ScoreTable({ peopleData }) {
+  const classes = useStyles();
+  const [shownRows, setShownRows] = React.useState(10);
+  const [order, setOrder] = React.useState(undefined);
+  const [orderBy, setOrderBy] = React.useState(undefined);
+  const [sortedTable, setSortedTable] = React.useState(peopleData);
+  React.useEffect(() => {
+    setSortedTable(peopleData.slice(0, shownRows));
+  }, [peopleData, shownRows]);
+
+  const handleSeeMore = () => {
+    setShownRows(shownRows + 10);
+  };
+  const handleSorting = (attribute, attributeType) => {
+    const newOrder =
+      attribute !== orderBy ? order : order === "asc" ? "desc" : "asc";
+    setOrder(newOrder);
+    setOrderBy(attribute);
+    setSortedTable(
+      getSortedTable(peopleData, newOrder, attribute, attributeType)
+    );
+  };
   return (
     <React.Fragment>
       <Title>Scores listing</Title>
       <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Last name</TableCell>
-            <TableCell>First name</TableCell>
-            <TableCell>Gender</TableCell>
-            <TableCell>City</TableCell>
-            <TableCell>Country</TableCell>
-            <TableCell align="right">Score</TableCell>
-          </TableRow>
-        </TableHead>
+        <EnhancedHeaderTable
+          columnsDetails={columnsDetails}
+          handleSorting={handleSorting}
+          order={order}
+          orderBy={orderBy}
+        />
         <TableBody>
-          {rows.map(row => (
+          {sortedTable.slice(0, shownRows).map(row => (
             <TableRow key={row.id}>
-              <TableCell>{row.lastName}</TableCell>
-              <TableCell>{row.firstName}</TableCell>
-              <TableCell>{row.gender}</TableCell>
+              <TableCell>
+                {row.last_name}
+              </TableCell>
+              <TableCell>
+                {row.first_name}
+              </TableCell>
+              <TableCell>
+                {row.gender}
+              </TableCell>
               <TableCell>{row.city}</TableCell>
-              <TableCell>{row.country}</TableCell>
+              <TableCell>
+                {row.country}
+              </TableCell>
               <TableCell align="right">{row.score}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
       <div className={classes.seeMore}>
-        <Link color="primary" href="#">
+        <Link color="primary" href="#" onClick={handleSeeMore}>
           See more scores
         </Link>
       </div>
