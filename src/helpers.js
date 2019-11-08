@@ -74,3 +74,33 @@ export const getChartInfoByGender = peopleData => {
     chartData: groupByGenderArray
   };
 };
+
+function compareStrings(item1, item2, order, orderBy) {
+  if (item1[orderBy] === item2[orderBy]) {
+    return 0;
+  } else if (item1[orderBy] === null) {
+    return 1;
+  } else if (item2[orderBy] === null) {
+    return -1;
+  } else if (order === "asc") {
+    return item1[orderBy].toLowerCase() < item2[orderBy].toLowerCase() ? -1 : 1;
+  } else {
+    return item1[orderBy].toLowerCase() < item2[orderBy].toLowerCase() ? 1 : -1;
+  }
+}
+
+function compareNumericals(item1, item2, orderBy) {
+  return item1[orderBy] - item2[orderBy];
+}
+
+export function getSortedTable(peopleData, order, orderBy, attributeType) {
+  return peopleData.sort((item1, item2) => {
+    if (attributeType === "number") {
+      return order === "asc"
+        ? compareNumericals(item1, item2, orderBy)
+        : -compareNumericals(item1, item2, orderBy);
+    } else {
+      return compareStrings(item1, item2, order, orderBy);
+    }
+  });
+}

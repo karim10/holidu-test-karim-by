@@ -11,6 +11,8 @@ import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Title from "./Title";
 
+import { getSortedTable } from "./helpers";
+
 const useStyles = makeStyles(theme => ({
   seeMore: {
     marginTop: theme.spacing(3)
@@ -52,36 +54,6 @@ const columnsDetails = [
     attributeType: "number"
   }
 ];
-
-function compareStrings(item1, item2, order, orderBy) {
-  if (item1[orderBy] === item2[orderBy]) {
-    return 0;
-  } else if (item1[orderBy] === null) {
-    return 1;
-  } else if (item2[orderBy] === null) {
-    return -1;
-  } else if (order === "asc") {
-    return item1[orderBy].toLowerCase() < item2[orderBy].toLowerCase() ? -1 : 1;
-  } else {
-    return item1[orderBy].toLowerCase() < item2[orderBy].toLowerCase() ? 1 : -1;
-  }
-}
-
-function compareNumericals(item1, item2, orderBy) {
-  return item1[orderBy] - item2[orderBy];
-}
-
-function getSortedTable(peopleData, order, orderBy, attributeType) {
-  return peopleData.sort((item1, item2) => {
-    if (attributeType === "number") {
-      return order === "asc"
-        ? compareNumericals(item1, item2, orderBy)
-        : -compareNumericals(item1, item2, orderBy);
-    } else {
-      return compareStrings(item1, item2, order, orderBy);
-    }
-  });
-}
 
 function EnhancedHeaderTable(props) {
   const classes = useStyles();
