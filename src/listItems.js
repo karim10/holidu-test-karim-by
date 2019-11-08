@@ -17,16 +17,16 @@ export const mainListItems = (
   </div>
 );
 
-export const secondaryListItems = (
+export const secondaryListItems = (handleSetChartData) => (
   <div>
     <ListSubheader inset>Saved reports</ListSubheader>
-    <ListItem button>
+    <ListItem button onClick={() => handleSetChartData('byGender')}>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
       <ListItemText primary="Scores by gender" />
     </ListItem>
-    <ListItem button>
+    <ListItem button onClick={() => handleSetChartData('byCountry')}>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
