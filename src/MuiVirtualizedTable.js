@@ -29,8 +29,10 @@ function MuiVirtualizedTable(props) {
     classes,
     rowHeight,
     headerHeight,
-    order,
-    orderBy,
+    order: {
+      orderDirection,
+      orderBy
+    },
     handleSorting,
     ...tableProps
   } = props;
@@ -61,7 +63,7 @@ function MuiVirtualizedTable(props) {
       >
         <TableSortLabel
           active={orderBy === columns[columnIndex].dataKey}
-          direction={order}
+          direction={orderDirection}
           onClick={() => handleSorting(columns[columnIndex])}
         >
           {label}
@@ -108,12 +110,10 @@ function MuiVirtualizedTable(props) {
   );
 }
 
-
-
 export const VirtualizedTable = withStyles(styles)(MuiVirtualizedTable);
 
 VirtualizedTable.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object,
   columns: PropTypes.arrayOf(
     PropTypes.shape({
       dataKey: PropTypes.string.isRequired,
@@ -123,14 +123,16 @@ VirtualizedTable.propTypes = {
   ).isRequired,
   headerHeight: PropTypes.number,
   rowHeight: PropTypes.number,
-  order: PropTypes.oneOf(["asc", "desc"]),
-  orderBy: PropTypes.oneOf([
-    "last_name",
-    "first_name",
-    "gender",
-    "city",
-    "country",
-    "score"
-  ]),
+  order: PropTypes.shape({
+    orderDirection: PropTypes.oneOf(["asc", "desc"]),
+    orderBy: PropTypes.oneOf([
+      "last_name",
+      "first_name",
+      "gender",
+      "city",
+      "country",
+      "score"
+    ])
+  }),
   handleSorting: PropTypes.func.isRequired
 };

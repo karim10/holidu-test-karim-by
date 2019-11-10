@@ -104,3 +104,28 @@ export function getSortedTable(peopleData, order, orderBy, isNumeric) {
     }
   });
 }
+const fileteringAttributes = [
+  "first_name",
+  "last_name",
+  "gender",
+  "city",
+  "country",
+  "score"
+];
+export function getFilteredTable(peopleData, queryInput) {
+  return peopleData.filter(person =>
+    Object.keys(person).reduce((acc, att) => {
+      if (person[att] === null || fileteringAttributes.indexOf(att) === -1) {
+        return acc;
+      }
+      acc =
+        person[att]
+          .toString()
+          .toLowerCase()
+          .indexOf(queryInput.toLowerCase()) !== -1
+          ? true
+          : acc;
+      return acc;
+    }, false)
+  );
+}
