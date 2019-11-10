@@ -8,9 +8,9 @@ import {
   ResponsiveContainer
 } from "recharts";
 import Title from "./Title";
+import PropTypes from "prop-types";
 
-export default function Chart({ chartInfo }) {
-  const { chartData, chartType } = chartInfo;
+export default function Chart({ chartData, chartType }) {
   return (
     <React.Fragment>
       <Title>Score statistics</Title>
@@ -36,3 +36,8 @@ export default function Chart({ chartInfo }) {
     </React.Fragment>
   );
 }
+
+Chart.propTypes = {
+  chartType: PropTypes.oneOf(["byCountry", "byGender"]).isRequired,
+  chartInfo: PropTypes.array.isRequired
+};

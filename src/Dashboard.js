@@ -106,7 +106,7 @@ export default function Dashboard() {
   const [open, setOpen] = React.useState(true);
   const [peopleData, setPeopleData] = React.useState([]);
   const [chartInfo, setChartInfo] = React.useState({
-    chartType: "country",
+    chartType: "byCountry",
     chartData: []
   });
 
@@ -187,7 +187,7 @@ export default function Dashboard() {
             {/* Chart */}
             <Grid item xs={12}>
               <Paper className={fixedHeightPaper}>
-                <Chart chartInfo={chartInfo} />
+                <Chart {...chartInfo} />
               </Paper>
             </Grid>
             {/* Recent scores */}
