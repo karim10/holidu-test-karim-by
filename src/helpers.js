@@ -93,9 +93,9 @@ function compareNumericals(item1, item2, orderBy) {
   return item1[orderBy] - item2[orderBy];
 }
 
-export function getSortedTable(peopleData, order, orderBy, attributeType) {
+export function getSortedTable(peopleData, order, orderBy, isNumeric) {
   return peopleData.sort((item1, item2) => {
-    if (attributeType === "number") {
+    if (isNumeric) {
       return order === "asc"
         ? compareNumericals(item1, item2, orderBy)
         : -compareNumericals(item1, item2, orderBy);
