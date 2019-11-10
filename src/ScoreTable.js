@@ -1,7 +1,6 @@
 /* eslint-disable no-script-url */
 
 import React from "react";
-import { VirtualizedTable } from "./VirtualizedTable";
 import Paper from "@material-ui/core/Paper";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import TextField from "@material-ui/core/TextField";
@@ -9,6 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 
 import Title from "./Title";
+import VirtualizedTable from "./VirtualizedTable";
 import { getSortedTable, getFilteredTable } from "./helpers";
 
 const columnsDetails = [
@@ -69,14 +69,17 @@ export default function ScoreTable({ peopleData }) {
     [peopleData, order]
   );
 
-  const handleSearch = React.useCallback(e => {
-    const queryInput = e.target.value;
-    let data = peopleData;
-    if (order.orderBy !== undefined) {
-      data = getSortedTable(peopleData, order);
-    }
-    setTableData(getFilteredTable(data, queryInput));
-  }, [peopleData, order]);
+  const handleSearch = React.useCallback(
+    e => {
+      const queryInput = e.target.value;
+      let data = peopleData;
+      if (order.orderBy !== undefined) {
+        data = getSortedTable(peopleData, order);
+      }
+      setTableData(getFilteredTable(data, queryInput));
+    },
+    [peopleData, order]
+  );
 
   return (
     <React.Fragment>

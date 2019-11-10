@@ -22,11 +22,11 @@ export const getChartDataByCountry = peopleData => {
 };
 
 const getAverageScoreByGender = (groupByGenderObj, gender) =>
-  groupByGenderObj[gender].totalScore / groupByGenderObj[gender].totalNumber;
+  groupByGenderObj[gender].totalScore / groupByGenderObj[gender].totalPeople;
 
 const initAccValue = {
   totalScore: 0,
-  totalNumber: 0
+  totalPeople: 0
 };
 
 export const getChartDataByGender = peopleData => {
@@ -34,13 +34,13 @@ export const getChartDataByGender = peopleData => {
     (acc, person) => {
       if (person.gender === "Female") {
         acc.female.totalScore += person.score;
-        acc.female.totalNumber++;
+        acc.female.totalPeople++;
       } else if (person.gender === "Male") {
         acc.male.totalScore += person.score;
-        acc.male.totalNumber++;
+        acc.male.totalPeople++;
       } else {
         acc.NA.totalScore += person.score;
-        acc.NA.totalNumber++;
+        acc.NA.totalPeople++;
       }
       return acc;
     },
@@ -68,14 +68,14 @@ export const getChartDataByGender = peopleData => {
 };
 
 // compares two strings with omitting null values
-function compareStrings(item1, item2, order, orderBy) {
+function compareStrings(item1, item2, orderDirection, orderBy) {
   if (item1[orderBy] === item2[orderBy]) {
     return 0;
   } else if (item1[orderBy] === null) {
     return 1;
   } else if (item2[orderBy] === null) {
     return -1;
-  } else if (order === "asc") {
+  } else if (orderDirection === "asc") {
     return item1[orderBy].toLowerCase() < item2[orderBy].toLowerCase() ? -1 : 1;
   } else {
     return item1[orderBy].toLowerCase() < item2[orderBy].toLowerCase() ? 1 : -1;
@@ -92,13 +92,11 @@ export function getSortedTable(
   peopleData,
   { orderDirection, orderBy, isNumeric }
 ) {
-  return peopleData.sort((item1, item2) => {
-    if (isNumeric) {
-      return compareNumericals(item1, item2, orderDirection, orderBy);
-    } else {
-      return compareStrings(item1, item2, orderDirection, orderBy);
-    }
-  });
+  return peopleData.sort((item1, item2) =>
+    isNumeric
+      ? compareNumericals(item1, item2, orderDirection, orderBy)
+      : compareStrings(item1, item2, orderDirection, orderBy)
+  );
 }
 const fileteringAttributes = [
   "first_name",

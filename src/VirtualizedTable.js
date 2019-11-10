@@ -1,38 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 import TableCell from "@material-ui/core/TableCell";
 import { AutoSizer, Column, Table } from "react-virtualized";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 
-const styles = theme => ({
+const useStyles = makeStyles({
   flexContainer: {
     display: "flex",
     alignItems: "center"
-  },
-  table: {
-    // temporary right-to-left patch, waiting for
-    // https://github.com/bvaughn/react-virtualized/issues/454
-    "& .ReactVirtualized__Table__headerRow": {
-      flip: false,
-      paddingRight: theme.direction === "rtl" ? "0px !important" : undefined
-    }
   },
   tableCell: {
     flex: 1
   }
 });
 
-function MuiVirtualizedTable(props) {
+export default function VirtualizedTable(props) {
+  const classes = useStyles();
   const {
     columns,
-    classes,
     rowHeight,
     headerHeight,
-    order: {
-      orderDirection,
-      orderBy
-    },
+    order: { orderDirection, orderBy },
     handleSorting,
     ...tableProps
   } = props;
@@ -110,10 +99,7 @@ function MuiVirtualizedTable(props) {
   );
 }
 
-export const VirtualizedTable = withStyles(styles)(MuiVirtualizedTable);
-
 VirtualizedTable.propTypes = {
-  classes: PropTypes.object,
   columns: PropTypes.arrayOf(
     PropTypes.shape({
       dataKey: PropTypes.string.isRequired,

@@ -12,6 +12,7 @@ import PropTypes from "prop-types";
 
 export default function Chart({ chartType, chartData }) {
   let data = chartData;
+  // displays randomly 7 countries scores
   if (chartType === "country") {
     data = chartData.sort(() => Math.random() - Math.random()).slice(0, 7);
   }
