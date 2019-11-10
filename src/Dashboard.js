@@ -18,7 +18,7 @@ import { mainListItems, secondaryListItems } from "./listItems";
 import Chart from "./Chart";
 import ScoreTable from "./ScoreTable";
 
-import { getChartInfoByCountry, getChartInfoByGender } from "./helpers";
+import { getChartDataByCountry, getChartDataByGender } from "./helpers";
 
 const drawerWidth = 240;
 
@@ -101,35 +101,60 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+function reducer(state, action) {
+  switch (action.type) {
+    case "setPeopleData":
+      return {
+        ...state,
+        peopleData: action.peopleData
+      };
+    case "displayByCountry":
+      return {
+        ...state,
+        chartType: "country",
+        chartData: getChartDataByCountry(state.peopleData)
+      };
+    case "displayByGender":
+      return {
+        ...state,
+        chartType: "gender",
+        chartData: getChartDataByGender(state.peopleData)
+      };
+    default:
+      return {
+        ...state
+      }
+  }
+}
+
+const initialState = {
+  peopleData: [],
+  chartType: "country",
+  chartData: []
+};
+
 export default function Dashboard() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
-  const [peopleData, setPeopleData] = React.useState([]);
-  const [chartInfo, setChartInfo] = React.useState({
-    chartType: "byCountry",
-    chartData: []
-  });
+  const [state, dispatch] = React.useReducer(reducer, initialState);
 
   React.useEffect(() => {
     const fetchData = async () => {
       const result = await fetch("api/people.json");
       const fetchedPeopleData = await result.json();
-      setPeopleData(fetchedPeopleData);
-      setChartInfo(getChartInfoByCountry(fetchedPeopleData));
+      dispatch({ type: "setPeopleData", peopleData: fetchedPeopleData });
+      dispatch({ type: "displayByCountry" });
     };
     fetchData();
   }, []);
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const handleSetChartData = chartType => {
-    chartType === "byCountry"
-      ? setChartInfo(getChartInfoByCountry(peopleData))
-      : setChartInfo(getChartInfoByGender(peopleData));
-  };
+
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
@@ -178,7 +203,7 @@ export default function Dashboard() {
         <Divider />
         <List>{mainListItems}</List>
         <Divider />
-        <List>{secondaryListItems(handleSetChartData)}</List>
+        <List>{secondaryListItems(dispatch)}</List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
@@ -187,13 +212,16 @@ export default function Dashboard() {
             {/* Chart */}
             <Grid item xs={12}>
               <Paper className={fixedHeightPaper}>
-                <Chart {...chartInfo} />
+                <Chart
+                  chartType={state.chartType}
+                  chartData={state.chartData}
+                />
               </Paper>
             </Grid>
             {/* Recent scores */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <ScoreTable peopleData={peopleData}/>
+                <ScoreTable peopleData={state.peopleData} />
               </Paper>
             </Grid>
           </Grid>

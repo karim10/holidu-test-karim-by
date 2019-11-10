@@ -10,13 +10,17 @@ import {
 import Title from "./Title";
 import PropTypes from "prop-types";
 
-export default function Chart({ chartData, chartType }) {
+export default function Chart({ chartType, chartData }) {
+  let data = chartData;
+  if (chartType === "country") {
+    data = chartData.sort(() => Math.random() - Math.random()).slice(0, 7);
+  }
   return (
     <React.Fragment>
       <Title>Score statistics</Title>
       <ResponsiveContainer>
         <BarChart
-          data={chartData}
+          data={data}
           margin={{
             top: 16,
             right: 16,
@@ -38,6 +42,6 @@ export default function Chart({ chartData, chartType }) {
 }
 
 Chart.propTypes = {
-  chartType: PropTypes.oneOf(["byCountry", "byGender"]).isRequired,
-  chartInfo: PropTypes.array.isRequired
+  chartType: PropTypes.oneOf(["country", "gender"]).isRequired,
+  chartData: PropTypes.array.isRequired
 };

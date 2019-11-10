@@ -1,4 +1,4 @@
-export const getChartInfoByCountry = peopleData => {
+export const getChartDataByCountry = peopleData => {
   const groupByCountryObj = peopleData.reduce((acc, person) => {
     if (acc.hasOwnProperty(person.country)) {
       acc[person.country].totalScore = +person.score;
@@ -18,12 +18,7 @@ export const getChartInfoByCountry = peopleData => {
       groupByCountryObj[country].totalScore /
       groupByCountryObj[country].totalPeople
   }));
-  return {
-    chartType: "byCountry",
-    chartData: groupByCountryArray
-      .sort(() => Math.random() - Math.random())
-      .slice(0, 7)
-  };
+  return groupByCountryArray;
 };
 
 const getAverageScoreByGender = (groupByGenderObj, gender) =>
@@ -34,7 +29,7 @@ const initAccValue = {
   totalNumber: 0
 };
 
-export const getChartInfoByGender = peopleData => {
+export const getChartDataByGender = peopleData => {
   const groupByGenderObj = peopleData.reduce(
     (acc, person) => {
       if (person.gender === "Female") {
@@ -69,10 +64,7 @@ export const getChartInfoByGender = peopleData => {
       score: getAverageScoreByGender(groupByGenderObj, "NA")
     }
   ];
-  return {
-    chartType: "byGender",
-    chartData: groupByGenderArray
-  };
+  return groupByGenderArray;
 };
 
 // compares two strings with omitting null values

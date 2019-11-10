@@ -1,7 +1,7 @@
 /* eslint-disable no-script-url */
 
 import React from "react";
-import { VirtualizedTable } from "./MuiVirtualizedTable";
+import { VirtualizedTable } from "./VirtualizedTable";
 import Paper from "@material-ui/core/Paper";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import TextField from "@material-ui/core/TextField";
@@ -49,31 +49,34 @@ export default function ScoreTable({ peopleData }) {
     setTableData(peopleData);
   }, [peopleData]);
 
-  const handleSorting = columnDetails => {
-    const { dataKey, isNumeric } = columnDetails;
-    const newOrderDirection =
-      dataKey !== order.orderBy
-        ? order.orderDirection
-        : order.orderDirection === "asc"
-        ? "desc"
-        : "asc";
-    const newOrder = {
-      orderDirection: newOrderDirection,
-      orderBy: dataKey,
-      isNumeric
-    };
-    setOrder(newOrder);
-    setTableData(getSortedTable(tableData, newOrder));
-  };
+  const handleSorting = React.useCallback(
+    columnDetails => {
+      const { dataKey, isNumeric } = columnDetails;
+      const newOrderDirection =
+        dataKey !== order.orderBy
+          ? order.orderDirection
+          : order.orderDirection === "asc"
+          ? "desc"
+          : "asc";
+      const newOrder = {
+        orderDirection: newOrderDirection,
+        orderBy: dataKey,
+        isNumeric
+      };
+      setOrder(newOrder);
+      setTableData(getSortedTable(peopleData, newOrder));
+    },
+    [peopleData, order]
+  );
 
-  const handleSearch = e => {
+  const handleSearch = React.useCallback(e => {
     const queryInput = e.target.value;
     let data = peopleData;
     if (order.orderBy !== undefined) {
       data = getSortedTable(peopleData, order);
     }
     setTableData(getFilteredTable(data, queryInput));
-  };
+  }, [peopleData, order]);
 
   return (
     <React.Fragment>
