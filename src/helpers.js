@@ -21,8 +21,7 @@ export const getChartInfoByCountry = peopleData => {
   return {
     chartType: "country",
     chartData: groupByCountryArray
-      .sort((item1, item2) => item2.score - item1.score)
-      .slice(0, 7)
+      .sort(() => Math.random() - Math.random()).slice(0, 7)
   };
 };
 
