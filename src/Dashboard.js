@@ -19,6 +19,7 @@ import Chart from './Chart';
 import ScoreTable from './ScoreTable';
 
 import { getChartDataByCountry, getChartDataByGender } from './helpers';
+import AlertDialog from './Dialog';
 
 const drawerWidth = 240;
 
@@ -137,13 +138,18 @@ export default function Dashboard() {
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
     const [state, dispatch] = React.useReducer(reducer, initialState);
-
+    const [error, setError] = React.useState(false);
     React.useEffect(() => {
         const fetchData = async () => {
-            const result = await fetch('api/people.json');
-            const fetchedPeopleData = await result.json();
-            dispatch({ type: 'setPeopleData', peopleData: fetchedPeopleData });
-            dispatch({ type: 'displayByCountry' });
+            try {
+                const result = await fetch('api/people.json');
+                const fetchedPeopleData = await result.json();
+                dispatch({ type: 'setPeopleData', peopleData: fetchedPeopleData });
+                dispatch({ type: 'displayByCountry' });
+            } catch (e) {
+                setError(true);
+                console.log("Error: ", e);
+            }
         };
         fetchData();
     }, []);
@@ -161,23 +167,23 @@ export default function Dashboard() {
         <div className={classes.root}>
             <CssBaseline />
             <AppBar
-                position='absolute'
+                position="absolute"
                 className={clsx(classes.appBar, open && classes.appBarShift)}
             >
                 <Toolbar className={classes.toolbar}>
                     <IconButton
-                        edge='start'
-                        color='inherit'
-                        aria-label='open drawer'
+                        edge="start"
+                        color="inherit"
+                        aria-label="open drawer"
                         onClick={handleDrawerOpen}
                         className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
                     >
                         <MenuIcon />
                     </IconButton>
                     <Typography
-                        component='h1'
-                        variant='h6'
-                        color='inherit'
+                        component="h1"
+                        variant="h6"
+                        color="inherit"
                         noWrap
                         className={classes.title}
                     >
@@ -186,7 +192,7 @@ export default function Dashboard() {
                 </Toolbar>
             </AppBar>
             <Drawer
-                variant='permanent'
+                variant="permanent"
                 classes={{
                     paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose)
                 }}
@@ -202,25 +208,32 @@ export default function Dashboard() {
                 <Divider />
                 <List>{secondaryListItems(dispatch)}</List>
             </Drawer>
-            <main className={classes.content}>
-                <div className={classes.appBarSpacer} />
-                <Container maxWidth='lg' className={classes.container}>
-                    <Grid container spacing={3}>
-                        {/* Chart */}
-                        <Grid item xs={12}>
-                            <Paper className={fixedHeightPaper}>
-                                <Chart chartType={state.chartType} chartData={state.chartData} />
-                            </Paper>
+            {error ? (
+                <AlertDialog />
+            ) : (
+                <main className={classes.content}>
+                    <div className={classes.appBarSpacer} />
+                    <Container maxWidth="lg" className={classes.container}>
+                        <Grid container spacing={3}>
+                            {/* Chart */}
+                            <Grid item xs={12}>
+                                <Paper className={fixedHeightPaper}>
+                                    <Chart
+                                        chartType={state.chartType}
+                                        chartData={state.chartData}
+                                    />
+                                </Paper>
+                            </Grid>
+                            {/* Recent scores */}
+                            <Grid item xs={12}>
+                                <Paper className={classes.paper}>
+                                    <ScoreTable peopleData={state.peopleData} />
+                                </Paper>
+                            </Grid>
                         </Grid>
-                        {/* Recent scores */}
-                        <Grid item xs={12}>
-                            <Paper className={classes.paper}>
-                                <ScoreTable peopleData={state.peopleData} />
-                            </Paper>
-                        </Grid>
-                    </Grid>
-                </Container>
-            </main>
+                    </Container>
+                </main>
+            )}
         </div>
     );
 }

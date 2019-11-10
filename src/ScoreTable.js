@@ -64,9 +64,9 @@ export default function ScoreTable({ peopleData }) {
                 isNumeric
             };
             setOrder(newOrder);
-            setTableData(getSortedTable(peopleData, newOrder));
+            setTableData(getSortedTable(tableData, newOrder));
         },
-        [peopleData, order]
+        [tableData, order]
     );
 
     const handleSearch = React.useCallback(
