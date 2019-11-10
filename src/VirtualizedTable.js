@@ -54,6 +54,7 @@ export default function VirtualizedTable(props) {
                     active={orderBy === columns[columnIndex].dataKey}
                     direction={orderDirection}
                     onClick={() => handleSorting(columns[columnIndex])}
+                    sortingkey={columns[columnIndex].dataKey}
                 >
                     {label}
                 </TableSortLabel>

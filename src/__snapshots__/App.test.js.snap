@@ -1,0 +1,493 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tests rendering renders Chart grouped by gender 1`] = `
+Array [
+  <h2
+    className="MuiTypography-root MuiTypography-h6 MuiTypography-colorPrimary MuiTypography-gutterBottom"
+  >
+    Score statistics
+  </h2>,
+  <div
+    className="recharts-responsive-container"
+    style={
+      Object {
+        "height": "100%",
+        "maxHeight": undefined,
+        "minHeight": undefined,
+        "minWidth": undefined,
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "display": "none",
+          "height": 0,
+          "position": "absolute",
+          "visibility": "hidden",
+          "width": 0,
+        }
+      }
+    />
+  </div>,
+]
+`;
+
+exports[`tests rendering renders ScoreTable 1`] = `
+Array [
+  <h2
+    className="MuiTypography-root MuiTypography-h6 MuiTypography-colorPrimary MuiTypography-gutterBottom"
+  >
+    Scores listing
+  </h2>,
+  <div
+    className="MuiFormControl-root MuiTextField-root"
+  >
+    <label
+      className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled"
+      data-shrink={[Function]}
+    >
+      Search...
+    </label>
+    <div
+      className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedEnd"
+      onClick={[Function]}
+    >
+      <input
+        aria-invalid={false}
+        className="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd"
+        disabled={false}
+        onAnimationStart={[Function]}
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        required={false}
+        type="text"
+      />
+      <div
+        className="MuiInputAdornment-root"
+      >
+        <button
+          className="MuiButtonBase-root MuiIconButton-root"
+          disabled={false}
+          onBlur={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          <span
+            className="MuiIconButton-label"
+          >
+            <svg
+              aria-hidden="true"
+              className="MuiSvgIcon-root"
+              focusable="false"
+              role="presentation"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+              />
+            </svg>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>,
+  <div
+    className="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+    style={
+      Object {
+        "height": 400,
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "height": 0,
+          "overflow": "visible",
+          "width": 0,
+        }
+      }
+    >
+      <div
+        aria-colcount={6}
+        aria-rowcount={10}
+        className="ReactVirtualized__Table"
+        role="grid"
+        style={Object {}}
+      >
+        <div
+          className="ReactVirtualized__Table__headerRow makeStyles-flexContainer-493"
+          role="row"
+          style={
+            Object {
+              "height": 48,
+              "overflow": "hidden",
+              "paddingRight": 0,
+              "width": 0,
+            }
+          }
+        >
+          <div
+            className="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style={
+              Object {
+                "WebkitFlex": "0 1 250px",
+                "flex": "0 1 250px",
+                "msFlex": "0 1 250px",
+              }
+            }
+          >
+            <div
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-head makeStyles-tableCell-494 MuiTableCell-alignLeft"
+              style={
+                Object {
+                  "height": 48,
+                }
+              }
+            >
+              <span
+                aria-disabled={false}
+                className="MuiButtonBase-root MuiTableSortLabel-root"
+                onBlur={[Function]}
+                onClick={[Function]}
+                onDragLeave={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                role="button"
+                sortingkey="last_name"
+                tabIndex={0}
+              >
+                Last Name
+                <svg
+                  aria-hidden="true"
+                  className="MuiSvgIcon-root MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc"
+                  focusable="false"
+                  role="presentation"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
+          <div
+            className="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style={
+              Object {
+                "WebkitFlex": "0 1 250px",
+                "flex": "0 1 250px",
+                "msFlex": "0 1 250px",
+              }
+            }
+          >
+            <div
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-head makeStyles-tableCell-494 MuiTableCell-alignLeft"
+              style={
+                Object {
+                  "height": 48,
+                }
+              }
+            >
+              <span
+                aria-disabled={false}
+                className="MuiButtonBase-root MuiTableSortLabel-root"
+                onBlur={[Function]}
+                onClick={[Function]}
+                onDragLeave={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                role="button"
+                sortingkey="first_name"
+                tabIndex={0}
+              >
+                First Name
+                <svg
+                  aria-hidden="true"
+                  className="MuiSvgIcon-root MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc"
+                  focusable="false"
+                  role="presentation"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
+          <div
+            className="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style={
+              Object {
+                "WebkitFlex": "0 1 250px",
+                "flex": "0 1 250px",
+                "msFlex": "0 1 250px",
+              }
+            }
+          >
+            <div
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-head makeStyles-tableCell-494 MuiTableCell-alignLeft"
+              style={
+                Object {
+                  "height": 48,
+                }
+              }
+            >
+              <span
+                aria-disabled={false}
+                className="MuiButtonBase-root MuiTableSortLabel-root"
+                onBlur={[Function]}
+                onClick={[Function]}
+                onDragLeave={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                role="button"
+                sortingkey="gender"
+                tabIndex={0}
+              >
+                Gender
+                <svg
+                  aria-hidden="true"
+                  className="MuiSvgIcon-root MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc"
+                  focusable="false"
+                  role="presentation"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
+          <div
+            className="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style={
+              Object {
+                "WebkitFlex": "0 1 250px",
+                "flex": "0 1 250px",
+                "msFlex": "0 1 250px",
+              }
+            }
+          >
+            <div
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-head makeStyles-tableCell-494 MuiTableCell-alignLeft"
+              style={
+                Object {
+                  "height": 48,
+                }
+              }
+            >
+              <span
+                aria-disabled={false}
+                className="MuiButtonBase-root MuiTableSortLabel-root"
+                onBlur={[Function]}
+                onClick={[Function]}
+                onDragLeave={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                role="button"
+                sortingkey="city"
+                tabIndex={0}
+              >
+                City
+                <svg
+                  aria-hidden="true"
+                  className="MuiSvgIcon-root MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc"
+                  focusable="false"
+                  role="presentation"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
+          <div
+            className="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style={
+              Object {
+                "WebkitFlex": "0 1 250px",
+                "flex": "0 1 250px",
+                "msFlex": "0 1 250px",
+              }
+            }
+          >
+            <div
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-head makeStyles-tableCell-494 MuiTableCell-alignLeft"
+              style={
+                Object {
+                  "height": 48,
+                }
+              }
+            >
+              <span
+                aria-disabled={false}
+                className="MuiButtonBase-root MuiTableSortLabel-root"
+                onBlur={[Function]}
+                onClick={[Function]}
+                onDragLeave={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                role="button"
+                sortingkey="country"
+                tabIndex={0}
+              >
+                Country
+                <svg
+                  aria-hidden="true"
+                  className="MuiSvgIcon-root MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc"
+                  focusable="false"
+                  role="presentation"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
+          <div
+            className="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style={
+              Object {
+                "WebkitFlex": "0 1 250px",
+                "flex": "0 1 250px",
+                "msFlex": "0 1 250px",
+              }
+            }
+          >
+            <div
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-head makeStyles-tableCell-494 MuiTableCell-alignRight"
+              style={
+                Object {
+                  "height": 48,
+                }
+              }
+            >
+              <span
+                aria-disabled={false}
+                className="MuiButtonBase-root MuiTableSortLabel-root"
+                onBlur={[Function]}
+                onClick={[Function]}
+                onDragLeave={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                role="button"
+                sortingkey="score"
+                tabIndex={0}
+              >
+                Score
+                <svg
+                  aria-hidden="true"
+                  className="MuiSvgIcon-root MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc"
+                  focusable="false"
+                  role="presentation"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          aria-label="grid"
+          aria-readonly={true}
+          className="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+          onScroll={[Function]}
+          role="rowgroup"
+          style={
+            Object {
+              "WebkitOverflowScrolling": "touch",
+              "boxSizing": "border-box",
+              "direction": "inherit",
+              "height": -48,
+              "overflowX": "hidden",
+              "overflowY": "auto",
+              "position": "relative",
+              "width": 0,
+              "willChange": "transform",
+            }
+          }
+          tabIndex={0}
+        />
+      </div>
+    </div>
+  </div>,
+]
+`;
