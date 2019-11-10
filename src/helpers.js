@@ -19,9 +19,10 @@ export const getChartInfoByCountry = peopleData => {
       groupByCountryObj[country].totalPeople
   }));
   return {
-    chartType: "country",
+    chartType: "byCountry",
     chartData: groupByCountryArray
-      .sort(() => Math.random() - Math.random()).slice(0, 7)
+      .sort(() => Math.random() - Math.random())
+      .slice(0, 7)
   };
 };
 
@@ -69,11 +70,12 @@ export const getChartInfoByGender = peopleData => {
     }
   ];
   return {
-    chartType: "gender",
+    chartType: "byGender",
     chartData: groupByGenderArray
   };
 };
 
+// compares two strings with omitting null values
 function compareStrings(item1, item2, order, orderBy) {
   if (item1[orderBy] === item2[orderBy]) {
     return 0;
@@ -88,18 +90,21 @@ function compareStrings(item1, item2, order, orderBy) {
   }
 }
 
-function compareNumericals(item1, item2, orderBy) {
-  return item1[orderBy] - item2[orderBy];
+function compareNumericals(item1, item2, orderDirection, orderBy) {
+  return orderDirection === "asc"
+    ? item2[orderBy] - item1[orderBy]
+    : item1[orderBy] - item2[orderBy];
 }
 
-export function getSortedTable(peopleData, order, orderBy, isNumeric) {
+export function getSortedTable(
+  peopleData,
+  { orderDirection, orderBy, isNumeric }
+) {
   return peopleData.sort((item1, item2) => {
     if (isNumeric) {
-      return order === "asc"
-        ? compareNumericals(item1, item2, orderBy)
-        : -compareNumericals(item1, item2, orderBy);
+      return compareNumericals(item1, item2, orderDirection, orderBy);
     } else {
-      return compareStrings(item1, item2, order, orderBy);
+      return compareStrings(item1, item2, orderDirection, orderBy);
     }
   });
 }

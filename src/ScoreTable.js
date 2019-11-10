@@ -35,13 +35,13 @@ const columnsDetails = [
   {
     label: "Score",
     dataKey: "score",
-    numeric: true
+    isNumeric: true
   }
 ];
 export default function ScoreTable({ peopleData }) {
   const [order, setOrder] = React.useState({
-    orderDirection: undefined,
-    orderBy: "asc",
+    orderDirection: "asc",
+    orderBy: undefined,
     isNumeric: false
   });
   const [tableData, setTableData] = React.useState(peopleData);
@@ -50,33 +50,27 @@ export default function ScoreTable({ peopleData }) {
   }, [peopleData]);
 
   const handleSorting = columnDetails => {
-    const { dataKey, numeric } = columnDetails;
+    const { dataKey, isNumeric } = columnDetails;
     const newOrderDirection =
       dataKey !== order.orderBy
         ? order.orderDirection
         : order.orderDirection === "asc"
         ? "desc"
         : "asc";
-    setOrder({
+    const newOrder = {
       orderDirection: newOrderDirection,
       orderBy: dataKey,
-      isNumeric: numeric
-    });
-    setTableData(
-      getSortedTable(tableData, newOrderDirection, dataKey, numeric)
-    );
+      isNumeric
+    };
+    setOrder(newOrder);
+    setTableData(getSortedTable(tableData, newOrder));
   };
 
   const handleSearch = e => {
     const queryInput = e.target.value;
     let data = peopleData;
     if (order.orderBy !== undefined) {
-      data = getSortedTable(
-        peopleData,
-        order.orderDirection,
-        order.orderBy,
-        order.isNumeric
-      );
+      data = getSortedTable(peopleData, order);
     }
     setTableData(getFilteredTable(data, queryInput));
   };

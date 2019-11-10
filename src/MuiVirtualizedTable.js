@@ -118,7 +118,7 @@ VirtualizedTable.propTypes = {
     PropTypes.shape({
       dataKey: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
-      numeric: PropTypes.bool
+      isNumeric: PropTypes.bool
     })
   ).isRequired,
   headerHeight: PropTypes.number,
