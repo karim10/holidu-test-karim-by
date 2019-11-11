@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TableCell from '@material-ui/core/TableCell';
 import { AutoSizer, Column, Table } from 'react-virtualized';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
+import clsx from 'clsx';
 
 const useStyles = makeStyles({
     flexContainer: {
@@ -11,7 +12,9 @@ const useStyles = makeStyles({
         alignItems: 'center'
     },
     tableCell: {
-        flex: 1
+        flex: 1,
+        textOverflow: 'ellipsis',
+        overflow: 'hidden'
     }
 });
 
@@ -29,9 +32,9 @@ export default function VirtualizedTable(props) {
         const alignment = columnIndex === columns.length - 1 ? 'right' : 'left';
         return (
             <TableCell
-                component='div'
+                component="div"
                 className={classes.tableCell}
-                variant='body'
+                variant="body"
                 style={{ height: rowHeight }}
                 align={alignment}
             >
@@ -44,9 +47,9 @@ export default function VirtualizedTable(props) {
         const alignment = columnIndex === columns.length - 1 ? 'right' : 'left';
         return (
             <TableCell
-                component='div'
-                className={classes.tableCell}
-                variant='head'
+                component="div"
+                className={clsx(classes.tableCell, classes.flexContainer)}
+                variant="head"
                 style={{ height: headerHeight }}
                 align={alignment}
             >

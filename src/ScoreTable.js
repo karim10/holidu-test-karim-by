@@ -6,10 +6,21 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
+import { makeStyles } from '@material-ui/core/styles';
 
 import Title from './Title';
 import VirtualizedTable from './VirtualizedTable';
 import { getSortedTable, getFilteredTable } from './helpers';
+
+const useStyles = makeStyles({
+    paper: {
+        height: 400
+    },
+    searchFiled: {
+        width: 300,
+        marginLeft: 15
+    }
+});
 
 const columnsDetails = [
     {
@@ -39,6 +50,7 @@ const columnsDetails = [
     }
 ];
 export default function ScoreTable({ peopleData }) {
+    const classes = useStyles();
     const [order, setOrder] = React.useState({
         orderDirection: 'asc',
         orderBy: undefined,
@@ -85,7 +97,7 @@ export default function ScoreTable({ peopleData }) {
         <React.Fragment>
             <Title>Scores listing</Title>
             <TextField
-                label='Search...'
+                label="Search..."
                 InputProps={{
                     endAdornment: (
                         <InputAdornment>
@@ -96,8 +108,9 @@ export default function ScoreTable({ peopleData }) {
                     )
                 }}
                 onChange={handleSearch}
+                className={classes.searchFiled}
             />
-            <Paper style={{ height: 400 }}>
+            <Paper className={classes.paper} elevation={0}>
                 <VirtualizedTable
                     rowCount={tableData.length}
                     rowGetter={({ index }) => tableData[index]}
