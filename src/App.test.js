@@ -1,25 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
-import { configure, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { render, fireEvent } from '@testing-library/react';
 
 import App from './App';
-import ScoreTable from './ScoreTable';
-import { getSortedTable, getChartDataByCountry, getChartDataByGender } from './helpers';
+import ScoreTable, { columnsDetails } from './ScoreTable';
+import Chart from './Chart';
+import VirtualizedTable from './VirtualizedTable';
+import { getSortedTable, getChartDataByGender } from './helpers';
 import {
     mockPopleDataWithLength3,
     mockPeopleDataSortedAscByFirstNameWithLength3,
     mockPopleDataSortedDescByScoreWithLength3,
     mockPeopleDataWithLength10,
-    mockChartDataGroupedByGender,
-    mockAverageScoreByCountry
+    mockChartDataGroupedByGender
 } from './mocks';
-import Chart from './Chart';
-import { TableSortLabel } from '@material-ui/core';
 
-// configuration
-configure({ adapter: new Adapter() });
 function createNodeMock() {
     const doc = document.implementation.createHTMLDocument();
     return { parentElement: doc.body };
@@ -46,19 +42,29 @@ describe('tests rendering', () => {
         );
         expect(component.toJSON()).toMatchSnapshot();
     });
-    it('calls handleSorting when header cell is clicked', () => {
-        const component = mount(<ScoreTable peopleData={mockPeopleDataWithLength10} />);
-        component
-            .find(TableSortLabel)
-            .findWhere(tsl => tsl.props().sortingkey === 'last_name')
-            .first()
-            .simulate('click');
-        expect(setState).toHaveBeenCalled();
+
+    const handleSorting = jest.fn();
+    const mockVirtualizedTableProps = {
+        columns: columnsDetails,
+        headerHeight: 48,
+        rowHeight: 48,
+        order: {
+            orderDirection: 'asc',
+            orderBy: undefined,
+            isNumeric: false
+        },
+        handleSorting
+    }
+    it('calls handleSorting when lastName column header clicked', () => {
+        const { getByTestId } = render(<VirtualizedTable {...mockVirtualizedTableProps} />);
+        const lastNameHeader = getByTestId('last_name');
+        fireEvent.click(lastNameHeader);
+        expect(handleSorting).toHaveBeenCalledWith({"dataKey": "last_name", "label": "Last Name"});
     });
 });
 
 describe('tests helpers functions', () => {
-    it('sorts people data', () => {
+    it('sorts people data correcty', () => {
         expect(
             getSortedTable(mockPopleDataWithLength3, {
                 orderDirection: 'asc',
@@ -73,13 +79,14 @@ describe('tests helpers functions', () => {
                 isNumeric: true
             })
         ).toEqual(mockPopleDataSortedDescByScoreWithLength3);
+        expect(
+            getSortedTable(mockPopleDataWithLength3, {
+                orderDirection: 'asc',
+                orderBy: 'score',
+                isNumeric: true
+            })
+        ).not.toEqual(mockPopleDataSortedDescByScoreWithLength3);
     });
-
-    // it('caculates average score by country', () => {
-    //     expect(getChartDataByCountry(mockPeopleDataWithLength10)).toEqual(
-    //         mockAverageScoreByCountry
-    //     );
-    // });
     it('caculates average score by gender', () => {
         expect(getChartDataByGender(mockPeopleDataWithLength10)).toEqual(
             mockChartDataGroupedByGender

@@ -22,7 +22,7 @@ const useStyles = makeStyles({
     }
 });
 
-const columnsDetails = [
+export const columnsDetails = [
     {
         label: 'Last Name',
         dataKey: 'last_name'

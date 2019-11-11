@@ -148,7 +148,7 @@ export default function Dashboard() {
                 dispatch({ type: 'displayByCountry' });
             } catch (e) {
                 setError(true);
-                console.log("Error: ", e);
+                console.log('Error: ', e);
             }
         };
         fetchData();
@@ -162,7 +162,6 @@ export default function Dashboard() {
     };
 
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-
     return (
         <div className={classes.root}>
             <CssBaseline />

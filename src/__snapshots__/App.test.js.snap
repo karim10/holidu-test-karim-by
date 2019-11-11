@@ -158,6 +158,7 @@ Array [
               <span
                 aria-disabled={false}
                 className="MuiButtonBase-root MuiTableSortLabel-root"
+                data-testid="last_name"
                 onBlur={[Function]}
                 onClick={[Function]}
                 onDragLeave={[Function]}
@@ -171,7 +172,6 @@ Array [
                 onTouchMove={[Function]}
                 onTouchStart={[Function]}
                 role="button"
-                sortingkey="last_name"
                 tabIndex={0}
               >
                 Last Name
@@ -212,6 +212,7 @@ Array [
               <span
                 aria-disabled={false}
                 className="MuiButtonBase-root MuiTableSortLabel-root"
+                data-testid="first_name"
                 onBlur={[Function]}
                 onClick={[Function]}
                 onDragLeave={[Function]}
@@ -225,7 +226,6 @@ Array [
                 onTouchMove={[Function]}
                 onTouchStart={[Function]}
                 role="button"
-                sortingkey="first_name"
                 tabIndex={0}
               >
                 First Name
@@ -266,6 +266,7 @@ Array [
               <span
                 aria-disabled={false}
                 className="MuiButtonBase-root MuiTableSortLabel-root"
+                data-testid="gender"
                 onBlur={[Function]}
                 onClick={[Function]}
                 onDragLeave={[Function]}
@@ -279,7 +280,6 @@ Array [
                 onTouchMove={[Function]}
                 onTouchStart={[Function]}
                 role="button"
-                sortingkey="gender"
                 tabIndex={0}
               >
                 Gender
@@ -320,6 +320,7 @@ Array [
               <span
                 aria-disabled={false}
                 className="MuiButtonBase-root MuiTableSortLabel-root"
+                data-testid="city"
                 onBlur={[Function]}
                 onClick={[Function]}
                 onDragLeave={[Function]}
@@ -333,7 +334,6 @@ Array [
                 onTouchMove={[Function]}
                 onTouchStart={[Function]}
                 role="button"
-                sortingkey="city"
                 tabIndex={0}
               >
                 City
@@ -374,6 +374,7 @@ Array [
               <span
                 aria-disabled={false}
                 className="MuiButtonBase-root MuiTableSortLabel-root"
+                data-testid="country"
                 onBlur={[Function]}
                 onClick={[Function]}
                 onDragLeave={[Function]}
@@ -387,7 +388,6 @@ Array [
                 onTouchMove={[Function]}
                 onTouchStart={[Function]}
                 role="button"
-                sortingkey="country"
                 tabIndex={0}
               >
                 Country
@@ -428,6 +428,7 @@ Array [
               <span
                 aria-disabled={false}
                 className="MuiButtonBase-root MuiTableSortLabel-root"
+                data-testid="score"
                 onBlur={[Function]}
                 onClick={[Function]}
                 onDragLeave={[Function]}
@@ -441,7 +442,6 @@ Array [
                 onTouchMove={[Function]}
                 onTouchStart={[Function]}
                 role="button"
-                sortingkey="score"
                 tabIndex={0}
               >
                 Score
