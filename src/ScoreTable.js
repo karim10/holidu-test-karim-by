@@ -92,7 +92,7 @@ export default function ScoreTable({ peopleData }) {
         },
         [peopleData, order]
     );
-
+    
     return (
         <React.Fragment>
             <Title>Scores listing</Title>

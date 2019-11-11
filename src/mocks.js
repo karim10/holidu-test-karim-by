@@ -25,14 +25,14 @@ export const mockPopleDataWithLength3 = [
     }
 ];
 
-export const mockPeopleDataSortedByFirstNameWithLength3 = [
+export const mockPeopleDataSortedAscByFirstNameWithLength3 = [
     {
-        first_name: 'Jaclin',
-        last_name: 'Casbourne',
+        first_name: 'Sunshine',
+        last_name: 'Mattusevich',
         gender: 'Female',
-        city: 'Kunvald',
-        country: 'CZ',
-        score: 53
+        city: 'Meiyao',
+        country: 'CN',
+        score: 69
     },
     {
         first_name: 'Murdock',
@@ -43,23 +43,23 @@ export const mockPeopleDataSortedByFirstNameWithLength3 = [
         score: null
     },
     {
-        first_name: 'Sunshine',
-        last_name: 'Mattusevich',
+        first_name: 'Jaclin',
+        last_name: 'Casbourne',
         gender: 'Female',
-        city: 'Meiyao',
-        country: 'CN',
-        score: 69
+        city: 'Kunvald',
+        country: 'CZ',
+        score: 53
     }
 ];
 
-export const mockPopleDataSortedByScoreWithLength3 = [
+export const mockPopleDataSortedDescByScoreWithLength3 = [
     {
-        first_name: 'Murdock',
-        last_name: 'Ledstone',
-        gender: 'Male',
-        city: 'Olofström',
-        country: 'SE',
-        score: null
+        first_name: 'Sunshine',
+        last_name: 'Mattusevich',
+        gender: 'Female',
+        city: 'Meiyao',
+        country: 'CN',
+        score: 69
     },
     {
         first_name: 'Jaclin',
@@ -70,12 +70,12 @@ export const mockPopleDataSortedByScoreWithLength3 = [
         score: 53
     },
     {
-        first_name: 'Sunshine',
-        last_name: 'Mattusevich',
-        gender: 'Female',
-        city: 'Meiyao',
-        country: 'CN',
-        score: 69
+        first_name: 'Murdock',
+        last_name: 'Ledstone',
+        gender: 'Male',
+        city: 'Olofström',
+        country: 'SE',
+        score: null
     }
 ];
 

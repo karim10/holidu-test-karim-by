@@ -14,7 +14,8 @@ const useStyles = makeStyles({
     tableCell: {
         flex: 1,
         textOverflow: 'ellipsis',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        whiteSpace: 'nowrap'
     }
 });
 

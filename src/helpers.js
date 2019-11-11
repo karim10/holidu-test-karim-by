@@ -71,16 +71,16 @@ function compareStrings(item1, item2, orderDirection, orderBy) {
     } else if (item2[orderBy] === null) {
         return -1;
     } else if (orderDirection === 'asc') {
-        return item1[orderBy].toLowerCase() < item2[orderBy].toLowerCase() ? -1 : 1;
-    } else {
         return item1[orderBy].toLowerCase() < item2[orderBy].toLowerCase() ? 1 : -1;
+    } else {
+        return item1[orderBy].toLowerCase() < item2[orderBy].toLowerCase() ? -1 : 1;
     }
 }
 
 function compareNumericals(item1, item2, orderDirection, orderBy) {
     return orderDirection === 'asc'
-        ? item2[orderBy] - item1[orderBy]
-        : item1[orderBy] - item2[orderBy];
+        ? item1[orderBy] - item2[orderBy]
+        : item2[orderBy] - item1[orderBy];
 }
 
 export function getSortedTable(peopleData, { orderDirection, orderBy, isNumeric }) {
