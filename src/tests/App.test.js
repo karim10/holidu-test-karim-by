@@ -3,17 +3,18 @@ import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
 import { render, fireEvent } from '@testing-library/react';
 
-import App from './App';
-import ScoreTable, { columnsDetails } from './ScoreTable';
-import Chart from './Chart';
-import VirtualizedTable from './VirtualizedTable';
-import { getSortedTable, getChartDataByGender } from './helpers';
+import App from '../App';
+import ScoreTable from '../ScoreTable';
+import Chart from '../Chart';
+import VirtualizedTable from '../VirtualizedTable';
+import { getSortedTable, getChartDataByGender } from '../helpers';
 import {
     mockPopleDataWithLength3,
     mockPeopleDataSortedAscByFirstNameWithLength3,
     mockPopleDataSortedDescByScoreWithLength3,
     mockPeopleDataWithLength10,
-    mockChartDataGroupedByGender
+    mockChartDataGroupedByGender,
+    mockVirtualizedTableProps
 } from './mocks';
 
 function createNodeMock() {
@@ -44,19 +45,8 @@ describe('tests rendering', () => {
     });
 
     const handleSorting = jest.fn();
-    const mockVirtualizedTableProps = {
-        columns: columnsDetails,
-        headerHeight: 48,
-        rowHeight: 48,
-        order: {
-            orderDirection: 'asc',
-            orderBy: undefined,
-            isNumeric: false
-        },
-        handleSorting
-    }
     it('calls handleSorting when lastName column header clicked', () => {
-        const { getByTestId } = render(<VirtualizedTable {...mockVirtualizedTableProps} />);
+        const { getByTestId } = render(<VirtualizedTable {...mockVirtualizedTableProps(handleSorting)} />);
         const lastNameHeader = getByTestId('last_name');
         fireEvent.click(lastNameHeader);
         expect(handleSorting).toHaveBeenCalledWith({"dataKey": "last_name", "label": "Last Name"});

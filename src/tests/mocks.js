@@ -1,3 +1,5 @@
+import { columnsDetails } from '../ScoreTable';
+
 export const mockPopleDataWithLength3 = [
     {
         first_name: 'Murdock',
@@ -198,3 +200,15 @@ export const mockChartDataGroupedByGender = [
     { gender: 'Male', score: 22.2 },
     { gender: 'NA', score: 70 }
 ];
+
+export const mockVirtualizedTableProps = (handleSorting) => ({
+    columns: columnsDetails,
+    headerHeight: 48,
+    rowHeight: 48,
+    order: {
+        orderDirection: 'asc',
+        orderBy: undefined,
+        isNumeric: false
+    },
+    handleSorting
+})
