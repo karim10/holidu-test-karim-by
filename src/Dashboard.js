@@ -186,7 +186,7 @@ export default function Dashboard() {
                         noWrap
                         className={classes.title}
                     >
-                        Holidu Interview Dashboard
+                        People Dashboard
                     </Typography>
                 </Toolbar>
             </AppBar>
